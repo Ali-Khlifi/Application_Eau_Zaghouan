@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webmapping plateform</title>
+
+    <!--Bootstrap Library-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+
+    <!--FontAwesome-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!--Leaflet-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+
+    <!--Leaflet Mini Map-->
+    <link rel="StyleSheet" href="plugins/Leaflet-MiniMap/dist/Control.MiniMap.min.css">
+    <script src="plugins/Leaflet-MiniMap/dist/Control.MiniMap.min.js"></script>
+
+    <!--Leaflet Basemaps-->
+    <link rel="StyleSheet" href="plugins/Leaflet-IconLayers/dist/iconLayers.css">
+    <script src="plugins/Leaflet-IconLayers/dist/iconLayers.js"></script>
+
+    <!--Leaflet Sidebar-->
+    <link rel="stylesheet" href="plugins/leaflet-sidebar-v2/css/leaflet-sidebar.css">
+    <script src="plugins/leaflet-sidebar-v2/js/leaflet-sidebar.js"></script>
+
+    <!--Leaflet Markers-->
+    <link rel="stylesheet" href="plugins/BeautifyMarker/leaflet-beautify-marker-icon.css">
+    <script src="plugins/BeautifyMarker/leaflet-beautify-marker-icon.js"></script>
+
+    <!--Leaflet Cluster-->
+    <link rel="stylesheet" href="plugins/Leaflet.markercluster/dist/MarkerCluster.css" />
+	<link rel="stylesheet" href="plugins/Leaflet.markercluster/dist/MarkerCluster.Default.css" />
+	<script src="plugins/Leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
+
+    <!--Leaflet Legend-->
+    <link rel="stylesheet" href="plugins/Leaflet.Legend/src/leaflet.legend.css" />
+	<script src="plugins/Leaflet.Legend/src/leaflet.legend.js"></script>
+
+    <!--High charts-->
+    <link rel="stylesheet" href="https://code.highcharts.com/css/highcharts.css">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+    <!--Page style-->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>  
+    <div id="sidebar" class="sidebar collapsed">
+        <!-- Nav tabs -->
+        <div class="sidebar-tabs">
+            <ul role="tablist">
+                <li><a href="#search" role="tab"><i class="fa fa-search"></i></a></li>
+                <li><a href="#population_assoifee" role="tab"><i class="fa fa-street-view"></i></a></li>
+                <li><a href="https://github.com/Turbo87/sidebar-v2" role="tab" target="_blank"><i class="fa fa-github"></i></a></li>
+                <li><a href="#info" role="tab"><i class="fa fa-info"></i></a></li>
+            </ul>
+        </div>
+
+        <!-- Tab panes -->
+        <div class="sidebar-content">
+            <div class="sidebar-pane" id="search">
+                <h1 class="sidebar-header">
+                     Entitées hydrauliques
+                    <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+                <div class="form-group" style="margin-top: 10px;">
+                    <label for="exampleInputEmail1">Communes</label>
+                    <select class="form-control" id="communes"></select>
+                    <label for="exampleInputEmail1">Points d'eau</label>
+                    <select class="form-control" id="pts_eau">
+                        <option value="forage_agri">Forage rural</option>
+                        <option value="forage_sonede">Forage urbain</option>
+                        <option value="puits_surface">Puits</option>
+                        <option value="source_naturelle">Sources naturelles</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary btn-block" id="search_pts"><i class="fa fa-search" aria-hidden="true"></i> Recherche</button>
+                <div id="graph_commune" style="margin-top: 10px;"></div>
+
+            </div>
+
+            <div class="sidebar-pane" id="population_assoifee">
+                <h1 class="sidebar-header">
+                    Population non desservies
+                   <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+               </h1>
+               <div class="form-group" style="margin-top: 10px;">
+                   <label for="exampleInputEmail1">Populations</label>
+                   <select class="form-control" id="populations"></select>
+                   <label for="exampleInputEmail1">Distance de recherche</label>
+                   <input type="number" class="form-control" id="distance" placeholder="Distance de recherche..." />
+               </div>
+               <button class="btn btn-primary btn-block" id="search_pts_pop"><i class="fa fa-search" aria-hidden="true"></i> Recherche</button>
+            </div>
+            <div class="sidebar-pane" id="info">
+                <h1 class="sidebar-header">
+                    Information
+                   <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+               </h1>
+               <div class="form-group" style="margin-top: 10px;">
+                <img src="assets/images/logo.png" style="width: 100%"/>
+                <h2 style="margin-top: 20px;">Eau de Zaghouan</h2>
+                <h6>Gestion optimale des ressources en eau</h6>
+                <p>Une application web vise l'amélioration de la gestion des ressources en eau de la ville de Zaghouan
+                </p>
+               </div>
+            </div>
+        </div>
+    </div>
+    <div id="map" class="sidebar-map"></div>
+    <script src="script.js"></script>
+</body>
+
+</html>

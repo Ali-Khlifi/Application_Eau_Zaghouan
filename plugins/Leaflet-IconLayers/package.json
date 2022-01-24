@@ -1,0 +1,39 @@
+{
+  "name": "leaflet-iconlayers",
+  "version": "0.2.0",
+  "description": "Leaflet control that displays base layers as small icons.",
+  "main": "dist/iconLayers.js",
+  "style": "dist/iconLayers.css",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "examples": "browserify -v examples/browserify.js > examples/browserify_bundle.js",
+    "prepublish": "gulp && npm run examples"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ScanEx/Leaflet-IconLayers.git"
+  },
+  "keywords": [
+    "leaflet"
+  ],
+  "author": {
+    "name": "Alexander Zverev",
+    "email": "alexander.zverev@gmail.com",
+    "url": "https://github.com/zverev"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ScanEx/Leaflet-IconLayers/issues"
+  },
+  "homepage": "https://github.com/ScanEx/Leaflet-IconLayers",
+  "dependencies": {
+    "leaflet": "^0.7.3"
+  },
+  "devDependencies": {
+    "browserify": "^12.0.1",
+    "gulp": "*",
+    "gulp-eslint": "^1.0.0"
+  }
+}
